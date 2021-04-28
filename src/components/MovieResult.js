@@ -1,20 +1,26 @@
-import {useState} from 'react'
+import { useState } from 'react'
 import { addMovieToStorage, existsInStorage } from '../utils/storage'
 
-export default function MovieResult({movie, addToLibEnabled}) {
+export default function MovieResult({ movie, addToLibEnabled, handleRemove }) {
     const [movieAdded, setMovieAdded] = useState(false)
-    const handleClick = (movie) => {
-        if(!movie) return
-        if(!existsInStorage(movie)){
+    //const [movieRemoved, setMovieRemoved] = useState(false)
+    //console.log(movie)
+    const handleAdd = (movie) => {
+        if (!movie) return
+        if (!existsInStorage(movie)) {
             addMovieToStorage(movie)
             setMovieAdded(true)
         }
     }
+
     return (
         <div>
-             <h2>{movie.Title}, {movie.Year}</h2>
-             {addToLibEnabled && <button disabled={existsInStorage(movie)} onClick={() => handleClick(movie)}>Lägg till</button>}
+            <h2>{movie.Title}, {movie.Year}</h2>
+            <img src={movie.Poster} alt="movie poster"/>
+            {addToLibEnabled && <button disabled={existsInStorage(movie) || movieAdded} onClick={() => handleAdd(movie)}>Lägg till</button>}
+            {!addToLibEnabled && <button disabled={!existsInStorage(movie)} onClick={() => handleRemove(movie)}>Ta bort</button>}
             {movieAdded && <h3>Movie added to library</h3>}
+            {/* {movieRemoved && <h3>Movie removed from library</h3>} */}
         </div>
     )
 }

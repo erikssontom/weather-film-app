@@ -1,4 +1,3 @@
-import {useEffect} from 'react'
 import useFetch from '../utils/useFetch'
 import MovieResult from './MovieResult';
 

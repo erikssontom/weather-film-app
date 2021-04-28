@@ -1,27 +1,26 @@
-const loadMovies = () =>{
+const loadMovies = () => {
     let moviesString = localStorage.getItem('movies');
-    let movies = JSON.parse(moviesString)
-    if(movies){
-        return movies;
-    }else{
-        return null
-    }
+    return JSON.parse(moviesString) ?? []
 }
 
 const addMovieToStorage = (movie) => {
     let movies = loadMovies();
-    if(movies){
-        movies.unshift(movie)
-    }else{
-        movies = []
-    }
+    movies.unshift(movie)
     let moviesString = JSON.stringify(movies);
     localStorage.setItem('movies', moviesString);
 }
+
 const existsInStorage = (movie) => {
     const movieList = loadMovies();
+    if (!movieList) return false;
     return !!movieList.find(movieInList => movieInList.imdbID === movie.imdbID)
 }
+const removeMovieFromStorage = (movie) => {
+    const movieList = loadMovies();
+    const filteredList = movieList.filter(movieInList => movieInList.imdbID !== movie.imdbID)
+    let moviesString = JSON.stringify(filteredList);
+    localStorage.setItem('movies', moviesString);
+    return filteredList;
+}
 
-
-module.exports = {loadMovies, addMovieToStorage, existsInStorage}
+module.exports = { loadMovies, addMovieToStorage, existsInStorage, removeMovieFromStorage }

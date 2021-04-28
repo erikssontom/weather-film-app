@@ -1,11 +1,19 @@
-import React from 'react'
-import { loadMovies } from '../utils/storage'
+import React, { useState } from 'react'
+import { loadMovies, existsInStorage, removeMovieFromStorage } from '../utils/storage'
 import MovieResult from './MovieResult';
 export default function MovieLib() {
-    const movieList = loadMovies();
+    const [movieList, setMovieList] = useState(loadMovies())
+
+    const handleRemove = (movie) => {
+        if (!movie) return
+        if (existsInStorage(movie)) {
+            const filteredList = removeMovieFromStorage(movie)
+            setMovieList(filteredList);
+        }
+    }
     return (
         <div>
-           {movieList && movieList.map((movie, i) => <MovieResult movie={movie} addToLibEnabled={false} key={i}/>)}
+            {movieList && movieList.map((movie, i) => <MovieResult movie={movie} handleRemove={handleRemove} removeFromLibEnabled={true} key={i} />)}
         </div>
     )
 }
