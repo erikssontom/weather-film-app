@@ -20,7 +20,6 @@ export default function MovieResult({ movie, addToLibEnabled, handleRemove }) {
             {addToLibEnabled && <button disabled={existsInStorage(movie) || movieAdded} onClick={() => handleAdd(movie)}>Lägg till</button>}
             {!addToLibEnabled && <button disabled={!existsInStorage(movie)} onClick={() => handleRemove(movie)}>Ta bort</button>}
             {movieAdded && <h3>Movie added to library</h3>}
-            {/* {movieRemoved && <h3>Movie removed from library</h3>} */}
         </div>
     )
 }
