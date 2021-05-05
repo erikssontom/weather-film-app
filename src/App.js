@@ -1,10 +1,10 @@
-import './App.css';
-import { Switch, BrowserRouter as Router, Route } from 'react-router-dom';
-import Home from './components/Home';
-import Navbar from './components/Navbar';
-import NotFound from './components/NotFound';
-import MovieLib from './components/MovieLib';
-import MovieSearch from './components/MovieSearch';
+import "./App.css";
+import { Switch, BrowserRouter as Router, Route } from "react-router-dom";
+import Home from "./components/Home";
+import Navbar from "./components/Navbar";
+import NotFound from "./components/NotFound";
+import MovieLib from "./components/MovieLib";
+import MovieSearch from "./components/MovieSearch";
 
 function App() {
   return (
