@@ -1,44 +1,70 @@
-import { useState } from 'react'
-import MovieResultList from './MovieResultList';
-export default function MovieSearch() {
+import { useState } from "react";
+import MovieResultList from "./MovieResultList";
+// Material UI
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
+import { makeStyles } from "@material-ui/core/styles";
+import { Typography } from "@material-ui/core";
 
-    const [searchTerm, setSearchTerm] = useState("");
-    const [year, setYear] = useState("");
-    const [searchUrl, setSearchUrl] = useState("");
+const useStyles = makeStyles((theme) => ({
+  root: {
+    "& > *": {
+      margin: theme.spacing(1),
+      width: "25ch",
+    },
+  },
+  title: {
+    margin: theme.spacing(2),
+  },
+}));
 
-    const handleFindMovie = (e) => {
-        e.preventDefault();
-        if (year.length === 0) {
-            setSearchUrl(`http://www.omdbapi.com/?apikey=f4094dbc&s=${encodeURI(searchTerm)}`)
-        } else {
-            setSearchUrl(`http://www.omdbapi.com/?apikey=f4094dbc&s=${encodeURI(searchTerm)}&y=${year}`)
-        }
+const MovieSearch = () => {
+  const classes = useStyles();
+  const [searchTerm, setSearchTerm] = useState("");
+  const [year, setYear] = useState("");
+  const [searchUrl, setSearchUrl] = useState("");
+
+  const handleFindMovie = (e) => {
+    e.preventDefault();
+    if (year.length === 0) {
+      setSearchUrl(
+        `http://www.omdbapi.com/?apikey=f4094dbc&s=${encodeURI(searchTerm)}`
+      );
+    } else {
+      setSearchUrl(
+        `http://www.omdbapi.com/?apikey=f4094dbc&s=${encodeURI(
+          searchTerm
+        )}&y=${year}`
+      );
     }
+  };
 
-    return (
-        <div>
-            <h2>Hitta en film</h2>
-            <form onSubmit={handleFindMovie}>
-            <label>Titel: </label>
-                <input
-                    type="text"
-                    required
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                />
-                <label>År: </label>
-                <input
-                    type="text"
-                    value={year}
-                    onChange={(e) => setYear(e.target.value)}
-                />
-                <button>Search for movie</button>
-            </form>
-            <form onSubmit={handleFindMovie}>
-            </form>
+  return (
+    <div>
+      <Typography className={classes.title} variant="h4">
+        Search movie
+      </Typography>
+      <form className={classes.root} onSubmit={handleFindMovie}>
+        <TextField
+          id="outlined-basic"
+          label="Title"
+          variant="outlined"
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+        <TextField
+          id="outlined-basic"
+          label="Year"
+          variant="outlined"
+          onChange={(e) => setYear(e.target.value)}
+        />
+        <Button type="submit" variant="contained" color="primary">
+          Search
+        </Button>
+      </form>
 
-            {searchUrl.length !== 0 && <MovieResultList url={searchUrl} />}
+      {searchUrl.length !== 0 && <MovieResultList url={searchUrl} />}
+    </div>
+  );
+};
 
-        </div>
-    )
-}
+export default MovieSearch;
