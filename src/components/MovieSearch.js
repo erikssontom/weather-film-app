@@ -49,12 +49,14 @@ const MovieSearch = () => {
           id="outlined-basic"
           label="Title"
           variant="outlined"
+          size="small"
           onChange={(e) => setSearchTerm(e.target.value)}
         />
         <TextField
           id="outlined-basic"
           label="Year"
           variant="outlined"
+          size="small"
           onChange={(e) => setYear(e.target.value)}
         />
         <Button type="submit" variant="contained" color="primary">
