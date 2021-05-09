@@ -1,5 +1,6 @@
 import useFetch from "../utils/useFetch";
 import MovieResult from "./MovieResult";
+import Grid from "@material-ui/core/Grid";
 
 const MovieResultList = ({ url }) => {
   const { data, isPending, error } = useFetch(url);
@@ -7,10 +8,14 @@ const MovieResultList = ({ url }) => {
     <div>
       {error && <h1>{error}</h1>}
       {isPending && <h1>Loading...</h1>}
-      {data &&
-        data.Search.map((movie, i) => (
-          <MovieResult movie={movie} addToLibEnabled={true} key={i} />
-        ))}
+      <Grid container spacing={3}>
+        {data &&
+          data.Search.map((movie, i) => (
+            <Grid item xs={12} md={4} lg={3}>
+              <MovieResult movie={movie} addToLibEnabled={true} key={i} />
+            </Grid>
+          ))}
+      </Grid>
     </div>
   );
 };
