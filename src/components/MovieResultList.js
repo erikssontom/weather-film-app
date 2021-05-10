@@ -1,13 +1,14 @@
 import useFetch from "../utils/useFetch";
 import MovieResult from "./MovieResult";
 import Grid from "@material-ui/core/Grid";
+import Typography from "@material-ui/core/Typography";
 
 const MovieResultList = ({ url }) => {
   const { data, isPending, error } = useFetch(url);
   return (
     <div>
       {error && <h1>{error}</h1>}
-      {isPending && <h1>Loading...</h1>}
+      {isPending && <Typography variant="h4">Loading...</Typography>}
       <Grid container spacing={3}>
         {data &&
           data.Search.map((movie, i) => (

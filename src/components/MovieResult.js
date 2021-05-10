@@ -20,6 +20,10 @@ const useStyles = makeStyles((theme) => ({
     margin: "1em auto",
     width: "50%",
   },
+  removeButton: {
+    margin: "1em auto",
+    width: "50%",
+  },
 }));
 
 const MovieResult = ({ movie, addToLibEnabled, handleRemove }) => {
@@ -39,7 +43,7 @@ const MovieResult = ({ movie, addToLibEnabled, handleRemove }) => {
     <div>
       <Paper className={classes.moviePaper} elevation={3}>
         <Typography variant="h5">{movie.Title}</Typography>
-        <Typography variant="subtitle">{movie.Year}</Typography>
+        <Typography variant="subtitle1">{movie.Year}</Typography>
         <img className={classes.img} src={movie.Poster} alt="movie poster" />
         {addToLibEnabled && (
           <Button
@@ -53,12 +57,15 @@ const MovieResult = ({ movie, addToLibEnabled, handleRemove }) => {
           </Button>
         )}
         {!addToLibEnabled && (
-          <button
+          <Button
+            className={classes.removeButton}
+            variant="contained"
+            color="secondary"
             disabled={!existsInStorage(movie)}
             onClick={() => handleRemove(movie)}
           >
-            Ta bort
-          </button>
+            Remove
+          </Button>
         )}
         {movieAdded && (
           <Typography variant="h6">Movie added to library</Typography>
