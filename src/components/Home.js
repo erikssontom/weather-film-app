@@ -53,7 +53,7 @@ const Home = () => {
   const [celsius, setCelsius] = useState("");
   const [weatherIconUrl, setWeatherIconUrl] = useState(null);
   const [isPending, setIsPending] = useState(false);
-  const API_KEY = "fa2d431993b9692b6f8c9d5f98a48dd5";
+  const API_KEY = "c22c9e03b4e839562bb63b8f1e2f51ae";
 
   const classes = useStyles();
 
