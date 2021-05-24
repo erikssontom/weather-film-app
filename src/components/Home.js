@@ -64,7 +64,6 @@ const Home = () => {
       const dataString = await getWeather(coordinates);
       const data = JSON.parse(dataString);
       setCelsius(data.main.temp + " C°");
-      const temp = data.main.temp;
       const weatherDescription = data.weather[0].description;
       const weatherIcon = data.weather[0].icon;
       setWeatherDescription(weatherDescription);
